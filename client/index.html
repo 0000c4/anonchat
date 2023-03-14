@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="client/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <title>anon chat</title>
+</head>
+
+<body>
+    <header>ANON CHAT</header>
+    <main>
+        <div id="messages-container">
+            <!--new messages displayed here -->
+        </div>
+        <div id="welcome_block" class="active">welcome to the anon chat. <br>
+            You can create/connect room chat with crypt or connect to main public chat <br> 
+            <div>
+            <button onclick="getLastMsgs()">public chat</button>
+            <button onclick="document.getElementById('create_room').style.opacity = '1'">create room</button>
+            <button onclick="document.getElementById('connect_room').style.opacity = '1'">connect room</button>
+            </div>
+        </div>
+        <form id="create_room" class="settingsBlock" enctype="multipart/form-data">
+            <input  class="formStyles" type="text" name="room_name" placeholder="room name"> <br>
+            <div>
+            <input type="radio" id="public"  name="security" value="public" checked="true">
+            <label for="public">public</label> 
+            <input type="radio" id="private"  name="security" value="private">
+            <label for="private">private</label>
+            </div>
+
+            <input id="room_password" class="formStyles" type="password" name="password" placeholder="password" disabled> <br>
+            <input type="checkbox" id="room_life" disabled>
+            <label for="room_life">limit time</label>
+            <input id="room_timer" type="number" name="room_timer" min="0" value="null" class="formStyles timer" disabled> <br>
+            <button type="submit"  class="formStyles submit_button">create</button>
+        </form>
+        <form id="connect_room" class="settingsBlock" enctype="multipart/form-data">
+            <input type="text" name="id" id="" class="formStyles" placeholder="id"> <br>
+            <input type="password" name="password" class="formStyles" placeholder="password" id=""> <br>
+            <button type="submit" class="formStyles submit_button" >connect</button>
+        </form>
+        <form id="msgForm" class="msgForm">
+            <div class="msgForm-header">
+                <div>
+                    <input type="text" class="formStyles" name="name" placeholder="nickname">
+                    <div id="changeColorName" onclick="changeNameColor(this)"></div>
+                </div>
+                <button type="submit" class="formStyles">send</button>
+            </div>
+            <textarea name="msg" class="formStyles" placeholder="message"></textarea>
+        </form>
+        <script src="client/main.js"></script>
+        <script src="client/ui.js"></script>
+    </main>
+</body>
+
+</html>
