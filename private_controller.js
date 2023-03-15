@@ -19,11 +19,11 @@ private_router.get('/:room_id', (req, res) => {
     sql.query('select password from private where id = ?', room_id).then(result => {
         jwt.verify(req.cookies.token, result[0][0].password, function (err, decoded) {
             if (decoded) {
-                res.sendFile(__dirname + "/client/private/index.html")
+                res.sendFile(__dirname + "/client/room/index.html")
             }
             if (err) {
                 console.log(err)
-                res.sendFile(__dirname + "/client/private/access_denied.html")
+                res.sendFile(__dirname + "/client/room/access_denied.html")
             };
         })
     })
@@ -37,10 +37,6 @@ private_router.get('/:room_id/get-last-msgs',(req,res)=>{
                     res.json(result[0])
                 })
             }
-            if (err) {
-                console.log(err)
-                res.sendFile(__dirname + "/client/private/access_denied.html")
-            };
         })
     })
 })

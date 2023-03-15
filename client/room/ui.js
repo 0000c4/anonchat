@@ -1,6 +1,7 @@
 let colorCount = 0;
 function changeNameColor(elem) {
     let colors = [
+        "black",
         "Gray",
         "Fuchsia",
         "Purple",

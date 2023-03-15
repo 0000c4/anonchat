@@ -7,7 +7,7 @@ public_router.use(express.static(__dirname + "/"));
 
 const emmiter = new events.EventEmitter();
 public_router.get('/:room_id', (req, res) => {
-    res.sendFile(__dirname + "/client/public/index.html")
+    res.sendFile(__dirname + "/client/room/index.html")
 })
 public_router.get('/:room_id/get-msg',(req,res)=>{
     emmiter.once('newMSG', (message)=>{
