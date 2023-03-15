@@ -47,7 +47,21 @@ connect_room.onsubmit = async (event) => {
         window.location = window.location + 'private/' + connect_room.id.value;
     }
 }
-function showMsg(message) {  //create msg element
+async function showRooms() {  //create msg element
+    let welcome_block = document.getElementById('welcome_block');
+    welcome_block.classList.toggle('active');
+    let res = await fetch('/public_list')
+    let rooms = await res.json();
+    for(room in rooms){
+        let roomElem = document.createElement('div');
+        roomElem.innerHTML = '<a class="public_room" href="public/'+ rooms[room].name +'_'+ rooms[room].id +'">' + rooms[room].name +'</a>'
+        let container = document.getElementById('messages-container')
+        container.append(roomElem);
+        container.scrollTop = container.scrollHeight;
+    }
+}
+
+function showMsg(message) {  //create public_room element
     let msgElem = document.createElement('div');
     msgElem.innerHTML = '<big style="color:'+ message.color +'">' + message.name + '</big>'
         + '<div>' + message.message + '</div>';
@@ -55,6 +69,7 @@ function showMsg(message) {  //create msg element
     container.append(msgElem);
     container.scrollTop = container.scrollHeight;
 }
+
 async function getLastMsgs(){ //generate last msg elements
     let welcome_block = document.getElementById('welcome_block');
     let res = await fetch('/get-last-msgs')
@@ -65,20 +80,3 @@ async function getLastMsgs(){ //generate last msg elements
         showMsg(msgs[msg]);
     }
 }
-async function subscribe() { //longpool
-    let res = await fetch('/get-msg');
-    if (res.status == 502) {
-        await subscribe();
-    }
-    else if (res.status != 200) {
-        await new Promise(resolve => setTimeout(resolve, 500));
-        await subscribe();
-    }
-    else {
-        let msg = await res.json();
-        showMsg(msg);
-        await subscribe();
-    }
-}
-
-subscribe();

@@ -1,31 +1,10 @@
-const events = require('events');
 const bcrypt = require('bcrypt')
 const sql = require('./sqlDB.js')
-const privateRoom = require('./private_controller.js')
-const emmiter = new events.EventEmitter();
-let messages = [];//massive with all msgs
 class controller{
-
     mainRender(req,res){
         res.sendFile(__dirname + "/client/index.html")
     }
-    msgSend(req,res){
-        emmiter.once('newMSG', (message)=>{
-            res.json(message)
-        })
-    }
-    
-    msgAllSend(req,res){
-        console.log(messages)
-        res.json(messages)
-    }
-    
-    getMsg(req,res){
-        const message = req.body;
-        messages.push(message);
-        emmiter.emit('newMSG', message)
-        res.sendStatus(200);
-    }
+
     async make_room(req,res){
         if(req.body.security == "private"){
             const hashedPassword = await bcrypt.hash(req.body.password,10)
@@ -42,6 +21,14 @@ class controller{
         }
         res.sendStatus(200);
     }
+
+    public_list(req,res){
+        sql.query('select * from public').then(result => {
+            res.json(result[0])
+            console.log(result[0])
+        })
+    }
+
 }
 
 module.exports = new controller();

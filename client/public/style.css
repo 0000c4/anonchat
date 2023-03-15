@@ -46,14 +46,11 @@ main {
 .msgForm {
     display: flex;
     position: relative;
-    bottom: -100%;
+    bottom: 0;
     transition: all 600ms ease-out;
     flex-direction: column;
     border: 2px solid cadetblue;
     border-radius: 7px;
-}
-.msgForm.active{
-    bottom: 0;
 }
 #msgForm input{
     padding: 3px;
@@ -133,13 +130,21 @@ background-color: black;
     width: 50px;
     padding: 2px 0;
  }
-.public_room{
-    display: block;
-    padding: 10px 0;
+ .denied{
+    position: absolute;
+    width: 33%;
+    left: 33%;
+    top: 50%;
+    margin-top: 5px;
+    padding: 5px 0px;
     text-align: center;
-    text-decoration: none;
-    color: black;
-}
-.public_room:hover{
-    color: black;
-}
+    transition: all 2500ms ease-out;
+    background-color: cadetblue;
+    color:white;
+    font-weight: 500;
+    border-radius: 7px;
+ }
+ .denied_img_container img{
+    width: 100px;
+    height: 100px;
+ }

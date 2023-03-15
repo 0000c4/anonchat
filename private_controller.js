@@ -35,7 +35,6 @@ private_router.get('/:room_id/get-last-msgs',(req,res)=>{
             if (decoded) {
                 sql.query('select name,color,message from ' + req.params['room_id']).then(result => {
                     res.json(result[0])
-                    console.log(result[0])
                 })
             }
             if (err) {
@@ -51,7 +50,6 @@ private_router.post('/:room_id/new-msg', (req, res) => {
         jwt.verify(req.cookies.token, result[0][0].password, function (err, decoded) {
             if (decoded) {
                 const message = req.body;
-                console.log(message)
                 sql.query('insert into ' + req.params['room_id'] + '(name,color,message) VALUES(?,?,?)', [message.name, message.color, message.message])
                 emmiter.emit('newMSG', message)
                 res.sendStatus(200);

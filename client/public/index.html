@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="client/public/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <title>anon chat</title>
+</head>
+
+<body>
+    <header>ANON CHAT</header>
+    <main>
+        <div id="messages-container">
+            <!--new messages displayed here -->
+        </div>
+        <form id="msgForm" class="msgForm">
+            <div class="msgForm-header">
+                <div>
+                    <input type="text" class="formStyles" name="name" placeholder="nickname">
+                    <div id="changeColorName" onclick="changeNameColor(this)"></div>
+                </div>
+                <button type="submit" class="formStyles">send</button>
+            </div>
+            <textarea name="msg" class="formStyles" placeholder="message"></textarea>
+        </form>
+        <script src="client/public/main.js"></script>
+        <script src="client/public/ui.js"></script>
+    </main>
+</body>
+
+</html>
