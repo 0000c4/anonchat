@@ -17,6 +17,11 @@ header{
     background-color: cadetblue;
     font-weight: 500;
 }
+header a{
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+}
 main {
     display: flex;
     flex-direction: column;

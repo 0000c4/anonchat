@@ -26,7 +26,7 @@ private_router.get('/:room_id', (req, res) => {
                 res.sendFile(__dirname + "/client/room/access_denied.html")
             };
         })
-    })
+    }).catch(err =>{console.log(err)});
 })
 private_router.get('/:room_id/get-last-msgs',(req,res)=>{
     const room_id = req.params['room_id'].split('_')[1];
@@ -35,10 +35,10 @@ private_router.get('/:room_id/get-last-msgs',(req,res)=>{
             if (decoded) {
                 sql.query('select name,color,message from ' + req.params['room_id']).then(result => {
                     res.json(result[0])
-                })
+                }).catch(err =>{console.log(err)});
             }
         })
-    })
+    }).catch(err =>{console.log(err)});
 })
 private_router.post('/:room_id/new-msg', (req, res) => {
     const room_id = req.params['room_id'].split('_')[1];
@@ -47,6 +47,7 @@ private_router.post('/:room_id/new-msg', (req, res) => {
             if (decoded) {
                 const message = req.body;
                 sql.query('insert into ' + req.params['room_id'] + '(name,color,message) VALUES(?,?,?)', [message.name, message.color, message.message])
+                .catch(err =>{console.log(err)});
                 emmiter.emit('newMSG', message)
                 res.sendStatus(200);
             }
@@ -54,7 +55,7 @@ private_router.post('/:room_id/new-msg', (req, res) => {
                 console.log('unauthorized access attempt')
             };
         })
-    })
+    }).catch(err =>{console.log(err)});
 })
 private_router.get('/:room_id/get-msg', (req, res) => {
     const room_id = req.params['room_id'].split('_')[1];
@@ -69,7 +70,7 @@ private_router.get('/:room_id/get-msg', (req, res) => {
                 console.log('unauthorized access attempt')
             };
         })
-    })
+    }).catch(err =>{console.log(err)});
 })
 
 private_router.post('/connect_room', (req, res) => {
@@ -85,6 +86,6 @@ private_router.post('/connect_room', (req, res) => {
 
                 }
             }
-        })
+        }).catch(err =>{console.log(err)});
 })
 module.exports = private_router;
